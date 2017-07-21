@@ -1,3 +1,3 @@
-﻿Public Class Form1
+﻿Public Class CalculadoraForm
 
 End Class
