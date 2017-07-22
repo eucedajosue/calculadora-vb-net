@@ -2,6 +2,12 @@
     Private parte_entero As String
     Private parte_decimal As String
 
+    Enum PARTE_ACTUAL_OPCIONES
+        _ENTERO = 0
+        _PUNTO = 1
+        _DECIMAL = 2
+    End Enum
+
     Private parte_actual As Integer = 0
 
     Private Sub Button_digits_Click(sender As Object, e As EventArgs) Handles ButtonPunto.Click,
@@ -18,22 +24,20 @@
         Try
             pantalla_agregar(sender.Text)
         Catch ex As Exception
-
+            MsgBox(ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Critical)
         End Try
-
-
     End Sub
 
     Private Sub pantalla_agregar(digito As String)
         If digito.Equals(".") Then
-            If parte_actual <> 0 Then
+            If parte_actual <> PARTE_ACTUAL_OPCIONES._ENTERO Then
                 Exit Sub
             End If
 
-            parte_actual = 1
+            parte_actual = PARTE_ACTUAL_OPCIONES._PUNTO
         Else
-            If parte_actual = 1 Then
-                parte_actual = 2
+            If parte_actual = PARTE_ACTUAL_OPCIONES._PUNTO Then
+                parte_actual = PARTE_ACTUAL_OPCIONES._DECIMAL
             End If
         End If
 
